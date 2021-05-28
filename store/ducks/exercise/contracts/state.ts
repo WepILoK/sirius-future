@@ -1,5 +1,3 @@
-import {LoadingStatus} from "../../../types";
-
 export interface IState {
     words: string[]
     wordCount: number
@@ -7,6 +5,5 @@ export interface IState {
     speed: number
     startingDistance: number
     increasingDistance: number
-    wordsWithSettings: undefined | string[]
-    loadingStatus: LoadingStatus
+    wordsWithSettings: [] | string[]
 }

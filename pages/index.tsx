@@ -4,7 +4,7 @@ import {Layout} from "../components/Layout";
 import styled from "@emotion/styled";
 import Link from "next/link";
 import {useDispatch, useSelector} from "react-redux";
-import {setSettings, setWordCount, startExercise} from "../store/ducks/exercise/actionCreators";
+import {setSettings, startExercise} from "../store/ducks/exercise/actionCreators";
 import {useRouter} from "next/router";
 import {selectExerciseState} from "../store/ducks/exercise/selectors";
 
@@ -45,34 +45,33 @@ export default function Home() {
     const wordRange = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     const distanceRange = [5, 10, 15, 20, 25, 30, 35, 40]
     const RangeOfLetters = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-    // const router = useRouter()
     const dispatch = useDispatch()
-    const exercise = useSelector(selectExerciseState)
-    const [speed, setSpeed] = useState(exercise.speed)
-    const [sliderWordsCount, setSliderWordsCount] = useState({max: 10, min: 1, value: exercise.wordCount});
-    const [sliderStartingDistance, setSliderStartingDistance] = useState({max: 40, min: 5, value: exercise.startingDistance});
-    const [sliderNumberOfLetters, setSliderNumberOfLetters] = useState({max: 12, min: 3, value: exercise.numberOfLetters});
-    const [sliderIncreasingDistance, setSliderIncreasingDistance] = useState({max: 40, min: 5, value: exercise.increasingDistance});
-
-    const updateWordsCount = () => {
-        dispatch(setWordCount(sliderWordsCount.value))
-    }
+    const [speed, setSpeed] = useState(1)
+    const [sliderWordsCount, setSliderWordsCount] = useState({max: 10, min: 1, value: 5});
+    const [sliderStartingDistance, setSliderStartingDistance] = useState({max: 40, min: 5, value: 20});
+    const [sliderNumberOfLetters, setSliderNumberOfLetters] = useState({max: 12, min: 3, value: 8});
+    const [sliderIncreasingDistance, setSliderIncreasingDistance] = useState({max: 40, min: 5, value: 20});
 
     const changeCountPlus = (): void => {
         if (speed < 5) {
             setSpeed(speed + 0.5)
-            dispatch(setSpeed(speed))
         }
     }
 
     const changeCountMinus = (): void => {
         if (speed > 1) {
             setSpeed(speed - 0.5)
-            dispatch(setSpeed(speed))
         }
     }
 
     const startGame = () => {
+        dispatch(setSettings({
+            wordCount: sliderWordsCount.value,
+            startingDistance: sliderStartingDistance.value,
+            numberOfLetters: sliderNumberOfLetters.value,
+            increasingDistance: sliderIncreasingDistance.value,
+            speed: speed
+        }))
         console.log({
             wordsCount: sliderWordsCount.value,
             startingDistance: sliderStartingDistance.value,
@@ -81,9 +80,6 @@ export default function Home() {
             count: speed
         })
         // router.push('/exercise')
-    }
-    if (!exercise) {
-        return null
     }
 
     return (

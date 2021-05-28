@@ -1,16 +1,14 @@
 import {ActionsType, IActions} from "./contracts/actionTypes";
 import {IState} from "./contracts/state";
-import {LoadingStatus} from "../../types";
 
 
 const exerciseState: IState = {
-    increasingDistance: 20,
-    loadingStatus: LoadingStatus.LOADED,
-    numberOfLetters: 8,
-    speed: 1,
-    startingDistance: 20,
-    wordCount: 5,
-    wordsWithSettings: undefined,
+    numberOfLetters: 0,
+    wordCount: 0,
+    increasingDistance: 0,
+    speed: 0,
+    startingDistance: 0,
+    wordsWithSettings: [],
     words: ['Человек', 'год', 'время', 'дело', 'жизнь', 'день', 'рука', 'раз', 'работа', 'слово', 'место', 'лицо',
         'друг', 'глаз', 'вопрос', 'дом', 'сторона', 'страна', 'мир', 'случай', 'голова', 'ребенок', 'сила', 'конец',
         'вид', 'система', 'часть', 'город', 'отношение', 'женщина', 'деньги', 'земля', 'машина', 'вода', 'отец',
@@ -24,36 +22,20 @@ const exerciseState: IState = {
 
 export const exerciseReducer = (state = exerciseState, action: IActions): IState => {
     switch (action.type) {
-        case ActionsType.SET_WORD_COUNT:
+        case ActionsType.SET_SETTINGS:
+            const makeRandomArr = (a: string, b: string) => {
+            return Math.random() - 0.5;
+            }
+            let newWordsArray = exerciseState.words.filter(i => i.length === action.payload.numberOfLetters).sort(makeRandomArr)
+            newWordsArray = newWordsArray.splice(0, action.payload.wordCount)
             return {
                 ...state,
-                wordCount: action.payload,
-            }
-        case ActionsType.SET_INCREASING_DISTANCE:
-            return {
-                ...state,
-                increasingDistance: action.payload,
-            }
-        case ActionsType.SET_SPEED:
-            return {
-                ...state,
-                speed: action.payload,
-            }
-        case ActionsType.SET_STARTING_DISTANCE:
-            return {
-                ...state,
-                startingDistance: action.payload,
-            }
-        case ActionsType.SET_NUMBER_OF_LETTERS:
-            return {
-                ...state,
-                numberOfLetters: action.payload,
-            }
-        case ActionsType.SET_START_EXERCISE:
-            let newWordsArray = exerciseState.words.filter(i => i.length === exerciseState.numberOfLetters).slice(exerciseState.wordCount)
-            console.log(newWordsArray)
-            return {
-                ...state, wordsWithSettings: newWordsArray
+                wordCount: action.payload.wordCount,
+                increasingDistance: action.payload.increasingDistance,
+                speed: action.payload.speed,
+                startingDistance: action.payload.startingDistance,
+                numberOfLetters: action.payload.numberOfLetters,
+                wordsWithSettings: newWordsArray,
             }
         default:
             return state
