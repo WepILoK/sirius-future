@@ -5,30 +5,33 @@ import {ChangeEvent, Dispatch, SetStateAction} from "react";
 interface ITuningUnitStyle {
     pattern?: boolean
 }
+
 const TuningUnitStyle = styled.div<ITuningUnitStyle>`
-    width: 708px;
-    height: 221px;
-    background: #FFFFFF;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 48.2498px;
-    padding: 32px 80px 15px 80px;
-    margin: 19px 20px 19px 20px;
-    text-align: center;
-    & > div > h1 {
+  flex: 0 1 50%;
+  max-width: 610px;
+  height: 186px;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 48.2498px;
+  padding: 22px 70px 17px 70px;
+  margin: 15px 16px 15px 16px;
+  text-align: center;
+
+  & > div > h1 {
     color: #371548;
-    font-size: 46px;
-    }
-    ${props =>
-    props.pattern ? `
+    font-size: 38px;
+  }
+  ${props =>
+          props.pattern ? `
     & > div {
     display: flex;
     justify-content:space-around;
-    margin-bottom: 16px
+    margin-bottom: 10px
     }
     & > img {
-    width: 91.75px;
-    height: 91.75px;
-    margin: 0 11px 0 11px;
+    width: 80px;
+    height: 80px;
+    margin: 10px 11px 0 11px;
     &:hover {
     cursor: pointer;
     opacity: 0.9;
@@ -41,10 +44,10 @@ const TuningUnitStyle = styled.div<ITuningUnitStyle>`
     & > div > ul {
     display: flex;
     justify-content:space-between;
-    padding: 14px 0 14px 0;
+    padding: 10px 0 10px 0;
     margin: 0 5px 0 5px;
     font-weight: 700;
-    font-size: 38px;
+    font-size: 30px;
     list-style-type: none;
     }
     `}
@@ -53,14 +56,14 @@ const TuningUnitStyle = styled.div<ITuningUnitStyle>`
 interface ITuningUnit {
     title: string
     arrayNumber?: number[]
-    sliderData?: {max: number, min: number, value: number}
+    sliderData?: { max: number, min: number, value: number }
     pattern?: boolean
     updateValue?: () => void
     updateSliderValue?: Dispatch<SetStateAction<{ max: number; min: number; value: number; }>>
 }
 
 export const TuningUnit: React.FC<ITuningUnit> =
-    ({children,updateSliderValue, sliderData, arrayNumber, title, pattern}) => {
+    ({children, updateSliderValue, sliderData, arrayNumber, title, pattern}) => {
 
         const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
             if (updateSliderValue && sliderData) {

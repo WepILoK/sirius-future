@@ -5,24 +5,37 @@ import {useDispatch, useSelector} from "react-redux";
 import {selectExerciseState, selectWordsState} from "../store/ducks/exercise/selectors";
 import {useRouter} from "next/router";
 
+
 interface IExerciseStyle {
     newDistance: number
 }
 
-const ExerciseStyle = styled.div<IExerciseStyle>(props => ({
+const ExerciseStyle = styled.div((props: IExerciseStyle) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '80%',
+    height: '81px',
     width: '100%',
     color: '#371548',
     fontSize: '60px',
     fontWeight: 900,
+    position: 'fixed',
+    top: '46vh',
+    left: '0px',
     '& > img': {
-        paddingTop: '22px',
-        paddingLeft: props.newDistance,
-        paddingRight: props.newDistance
-    }
+        paddingTop: '20px',
+        position: 'relative',
+        top: '0px',
+        left: '0px',
+    },
+    '& > .left-word': {
+        paddingRight: `${props.newDistance}px`
+    },
+    '& > .right-word': {
+        paddingLeft: `${props.newDistance}px`,
+
+    },
+
 }))
 
 
@@ -66,9 +79,9 @@ export default function Exercise() {
     return (
         <Layout>
             <ExerciseStyle newDistance={distance}>
-                {visible && <p>{word[0]}</p>}
+                <div className='left-word'>{visible && word[0]}ffff</div>
                 <img src='/static/space.svg'/>
-                {visible && <p>{word[1]}</p>}
+                <div className='right-word'>{visible && word[1]}ffff</div>
             </ExerciseStyle>
         </Layout>
     );

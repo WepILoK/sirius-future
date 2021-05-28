@@ -1,8 +1,13 @@
 import React from 'react';
 import styled from "@emotion/styled";
 
+interface InInput {
+    value: number
+    min: number
+    max: number
+}
 
-export const Input = styled.input(props => ({
+export const Input = styled.input<InInput>(props => ({
     '--value': `${props.value}`,
     '--min': `${props.min}`,
     '--max': `${props.max}`,

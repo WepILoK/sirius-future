@@ -3,42 +3,42 @@ import {TuningUnit} from "../components/TuningUnit ";
 import {Layout} from "../components/Layout";
 import styled from "@emotion/styled";
 import Link from "next/link";
-import {useDispatch, useSelector} from "react-redux";
-import {setSettings, startExercise} from "../store/ducks/exercise/actionCreators";
-import {useRouter} from "next/router";
-import {selectExerciseState} from "../store/ducks/exercise/selectors";
+import {useDispatch} from "react-redux";
+import {setSettings} from "../store/ducks/exercise/actionCreators";
 
 const Count = styled.div`
-width: 126px;
-height: 60px;
-border: 1px solid #000;
-border-radius: 20px;
-font-size:48px;
-font-weight: 700;
-text-align: center;
-line-height: 50px;
-position: relative;
-top: 5px;
+  width: 115px;
+  height: 50px;
+  border: 1px solid #000;
+  border-radius: 20px;
+  font-size: 38px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 45px;
+  position: relative;
+  top: 5px;
 `
 
 const Button = styled.button`
-width: 389px;
-height: 109px;
-background: #FDD207;
-border-radius: 81.5275px;
-border: none;
-font-size: 49px;
-font-weight: 700;
-color: #371548;
-margin: 94px 180px 94px 180px;
-filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-&:hover {
+  width: 389px;
+  height: 109px;
+  background: #FDD207;
+  border-radius: 81.5275px;
+  border: none;
+  font-size: 49px;
+  font-weight: 700;
+  color: #371548;
+  margin: 74px 137px 74px 137px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+  &:hover {
     cursor: pointer;
     opacity: 0.9;
-        }
-    &:active {
+  }
+
+  &:active {
     opacity: 0.8;
-    }
+  }
 `
 
 export default function Home() {
